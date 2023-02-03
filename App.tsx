@@ -1,7 +1,9 @@
-import {Button, Keyboard, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View} from 'react-native';
-import {ReactElement, ReactNode, useState} from "react";
-import ExpoCheckbox from "expo-checkbox";
-import Input from "./Input/Input";
+import {Keyboard, StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
+import {ReactElement, ReactNode, useEffect, useState} from "react";
+import MainApp from "./src/App/MainApp";
+import {Provider} from "react-redux";
+import {store} from "./src/reducers/store";
+import {authAPI, todolistAPI} from "./src/api/todolist-api";
 
 export default function App() {
     const [value, setValue] = useState('')
@@ -31,39 +33,43 @@ export default function App() {
 
     return (
         <View style={styles.container}>
-            <HideKeyboard>
-                <View style={{width: '100%', alignItems: 'center', paddingVertical: 20}}>
-                    <TextInput style={styles.input} value={value} onChangeText={setValue}/>
-                </View>
-            </HideKeyboard>
-            <View>
-                <Button color={'#ff8906'} title={'Add task'} onPress={addTask}/>
-            </View>
-            <View style={{width: '60%'}}>
-                {tasks.map((t) => {
-                    return <View key={t.id} style={[globalStyles.border, styles.boxTask]}>
-                        <ExpoCheckbox value={t.isDone} onValueChange={() => changeStatus(t.id, t.isDone)}/>
-                        {show === t.id
-                            ? <Input title={t.title} changeTitle={changeTitle} id={t.id}/>
-                            : <Text onPress={() => setShow(t.id)}>{t.title}</Text>}
-                    </View>
-                })}
-            </View>
+            {/*<HideKeyboard>*/}
+            {/*    <View style={{width: '100%', alignItems: 'center', paddingVertical: 20}}>*/}
+            {/*        <TextInput style={styles.input} value={value} onChangeText={setValue}/>*/}
+            {/*    </View>*/}
+            {/*</HideKeyboard>*/}
+            {/*<View>*/}
+            {/*    <Button color={'#ff8906'} title={'Add task'} onPress={addTask}/>*/}
+            {/*</View>*/}
+            {/*<View style={{width: '60%'}}>*/}
+            {/*    {tasks.map((t) => {*/}
+            {/*        return <View key={t.id} style={[globalStyles.border, styles.boxTask]}>*/}
+            {/*            <ExpoCheckbox value={t.isDone} onValueChange={() => changeStatus(t.id, t.isDone)}/>*/}
+            {/*            {show === t.id*/}
+            {/*                ? <Input title={t.title} changeTitle={changeTitle} id={t.id}/>*/}
+            {/*                : <Text onPress={() => setShow(t.id)}>{t.title}</Text>}*/}
+            {/*        </View>*/}
+            {/*    })}*/}
+            {/*</View>*/}
+            <Provider store={store}>
+                <MainApp/>
+            </Provider>
         </View>
     );
 }
 
-const HideKeyboard = ({children}: { children: ReactNode }): ReactElement => (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        {children}
-    </TouchableWithoutFeedback>
-)
+// const HideKeyboard = ({children}: { children: ReactNode }): ReactElement => (
+//     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+//         {children}
+//     </TouchableWithoutFeedback>
+// )
 
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#0F0e17',
+        // backgroundColor: '#ffffff',
         alignItems: 'center',
         justifyContent: 'center',
     },
