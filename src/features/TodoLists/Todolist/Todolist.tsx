@@ -52,7 +52,7 @@ export const Todolist = React.memo((props: PropsType) => {
 
     return <View>
         {/*<EditableSpan value={props.title} onChange={changeTodolistTitle}/>*/}
-            <Text>Delete Button</Text>
+            <Text>Delete Button Todolist</Text>
             {/*<IconButton aria-label="delete" onClick={removeTodolist} disabled={props.entityStatus === "loading"}>*/}
             {/*    <Delete/>*/}
             {/*</IconButton>*/}
@@ -74,31 +74,9 @@ export const Todolist = React.memo((props: PropsType) => {
             }
         </View>
         <View>
-            <Text>Button</Text>
-            <Text>Button</Text>
-            <Text>Button</Text>
-
-            {/*<Button size={"small"}*/}
-            {/*        variant={"contained"}*/}
-            {/*        color={props.filter === 'all' ? "secondary" : "primary"}*/}
-            {/*        disableElevation*/}
-            {/*        onClick={onAllClickHandler}>All*/}
-            {/*</Button>*/}
-
-            {/*<Button size={"small"}*/}
-            {/*        variant={"contained"}*/}
-            {/*        color={props.filter === 'active' ? "secondary" : "primary"}*/}
-            {/*        style={{marginLeft: "2px"}}*/}
-            {/*        disableElevation*/}
-            {/*        onClick={onActiveClickHandler}>Active*/}
-            {/*</Button>*/}
-            {/*<Button size={"small"}*/}
-            {/*        variant={"contained"}*/}
-            {/*        color={props.filter === 'completed' ? "secondary" : "primary"}*/}
-            {/*        style={{marginLeft: "2px"}}*/}
-            {/*        disableElevation*/}
-            {/*        onClick={onCompletedClickHandler}>Completed*/}
-            {/*</Button>*/}
+            {/*<Text>Button</Text>*/}
+            {/*<Text>Button</Text>*/}
+            {/*<Text>Button</Text>*/}
         </View>
     </View>
 })

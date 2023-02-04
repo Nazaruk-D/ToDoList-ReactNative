@@ -108,8 +108,6 @@ export const TodoLists = () => {
                     })
                     }
                 </Text>
-
-
             </View>
         </View>
     );

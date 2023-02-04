@@ -11,35 +11,28 @@ type PropsTaskType = {
     todolistId: string
 }
 
-export const Task: FC<PropsTaskType> = React.memo(({task  , removeTask, changeTaskTitle, changeTaskStatus, todolistId}) => {
+export const Task: FC<PropsTaskType> = React.memo(({
+                                                       task,
+                                                       removeTask,
+                                                       changeTaskTitle,
+                                                       changeTaskStatus,
+                                                       todolistId
+                                                   }) => {
 
-    const onClickHandler = useCallback(() => removeTask(task.id),[task.id])
+    const onClickHandler = useCallback(() => removeTask(task.id), [task.id])
     const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         let newIsDoneValue = e.currentTarget.checked;
         changeTaskStatus(task.id, newIsDoneValue ? TaskStatus.Completed : TaskStatus.New, todolistId);
-    },[task.id])
+    }, [task.id])
     const onTitleChangeHandler = useCallback((newValue: string) => {
         changeTaskTitle(task.id, newValue);
-    },[task.id])
+    }, [task.id])
 
 
     return (
         <View key={task.id}>
-            {/*<li*/}
-            {/*    key={task.id}*/}
-            {/*    className={task.status ? "is-done" : ""}*/}
-            {/*>*/}
-                <Text>CheckBox</Text>
-                <Text>Button</Text>
-                {/*<Checkbox size={"small"}*/}
-                {/*          color={"primary"}*/}
-                {/*          onChange={onChangeHandler}*/}
-                {/*          checked={task.status === TaskStatus.Completed}/>*/}
-                <EditableSpan value={task.title} onChange={onTitleChangeHandler}/>
-                {/*<IconButton aria-label="delete" onClick={onClickHandler}>*/}
-                {/*    <HighlightOff/>*/}
-                {/*</IconButton>*/}
-            {/*</li>*/}
+            <Text>CheckBox</Text>
+            <EditableSpan value={task.title} onChange={onTitleChangeHandler}/>
         </View>
     );
 })

@@ -35,18 +35,7 @@ function MainApp() {
     // return routes
     return (
         <View>
-            {/*<Text>123</Text>*/}
-            {/*<Text>123</Text>*/}
             <TodoLists/>
-            {/*<HeaderApp/>*/}
-            {/*<BodyApp/>*/}
-            {/*    <Routes>*/}
-                    {/*<Route path="/" element={<TodoLists/>}/>*/}
-                    {/*<Route path="/login" element={<Login/>}/>*/}
-                    {/*<Route path="/404" element={<Page404/>}/>*/}
-                    {/*<Route path="*" element={<Navigate to="/404"/>}/>*/}
-                {/*</Routes>*/}
-            {/*<ErrorSnackbar/>*/}
         </View>
     );
 }
