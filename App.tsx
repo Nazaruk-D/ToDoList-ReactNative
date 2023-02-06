@@ -1,8 +1,49 @@
-import {StyleSheet, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 import {useState} from "react";
-import MainApp from "./src/App/MainApp";
-import {Provider} from "react-redux";
-import {store} from "./src/reducers/store";
+import {NavigationContainer} from '@react-navigation/native';
+import {SafeAreaProvider} from "react-native-safe-area-context";
+import WithSafeAreaView from "./src/components/ComponentHelper/WithSafeAreaView";
+import {HomeProps, ProfileProps, RootStackParamList} from "./src/Type/NavigationType";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+
+
+function HomeScreen({navigation}: HomeProps) {
+    return (
+        <WithSafeAreaView>
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-between'}}>
+                <Text>Home Screen</Text>
+                <Button title={'change page'} onPress={() => navigation.navigate('Profile')}/>
+            </View>
+        </WithSafeAreaView>
+    );
+}
+
+function ProfileScreen({navigation}: ProfileProps) {
+    return (
+        <WithSafeAreaView>
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-between'}}>
+                <Text>Profile Screen</Text>
+                <Button title={'change page'} onPress={() => navigation.navigate('User')}/>
+            </View>
+        </WithSafeAreaView>
+    );
+}
+
+
+function UserScreen({navigation}: HomeProps) {
+    return (
+        <WithSafeAreaView>
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-between'}}>
+                <Text>User Screen</Text>
+                <Button title={'change page'} onPress={() => navigation.navigate('Home')}/>
+            </View>
+        </WithSafeAreaView>
+    );
+}
+
+
+// const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createBottomTabNavigator<RootStackParamList>();
 
 export default function App() {
     const [value, setValue] = useState('')
@@ -50,9 +91,19 @@ export default function App() {
             {/*        </View>*/}
             {/*    })}*/}
             {/*</View>*/}
-            <Provider store={store}>
-                <MainApp/>
-            </Provider>
+
+            {/*<Provider store={store}>*/}
+            {/*    <MainApp/>*/}
+            {/*</Provider>*/}
+            <SafeAreaProvider>
+                <NavigationContainer>
+                    <Stack.Navigator>
+                        <Stack.Screen name="Home" component={HomeScreen}/>
+                        <Stack.Screen name="Profile" component={ProfileScreen}/>
+                        <Stack.Screen name="User" component={UserScreen}/>
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </SafeAreaProvider>
         </View>
     );
 }
