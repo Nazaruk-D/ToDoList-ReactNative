@@ -34,7 +34,7 @@ function MainApp() {
     // ])
     // return routes
     return (
-        <View>
+        <View style={{flex: 1, backgroundColor: 'blue', display: 'flex', alignItems: 'center', paddingTop: 40}}>
             <TodoLists/>
         </View>
     );
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         top: '30%',
         textAlign: 'center',
         width: '100%'
-    }
+    },
 });
 
 export default MainApp;

@@ -1,11 +1,12 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {View} from "react-native";
+import {StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {MaterialIcons} from "@expo/vector-icons";
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
 }
 
-export const AddItemForm = React.memo ((props: AddItemFormPropsType) => {
+export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
 
     let [title, setTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
@@ -19,8 +20,8 @@ export const AddItemForm = React.memo ((props: AddItemFormPropsType) => {
         }
     }
 
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.currentTarget.value)
+    const onChangeHandler = (e: string) => {
+        setTitle(e)
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -45,8 +46,21 @@ export const AddItemForm = React.memo ((props: AddItemFormPropsType) => {
         {/*<IconButton aria-label="delete" onClick={addItem}>*/}
         {/*    <Add/>*/}
         {/*</IconButton>*/}
-        <View>AddItemForm</View>
+        <View style={{flexDirection: 'row'}}>
+            <TextInput style={styles.input} onChangeText={onChangeHandler} value={title}/>
+            <TouchableOpacity>
+                <MaterialIcons name="add" size={24} color="black"/>
+            </TouchableOpacity>
+        </View>
+
 
         {error && <div className="error-message">{error}</div>}
     </View>
+})
+
+const styles = StyleSheet.create({
+    input: {
+        width: 150,
+        backgroundColor: '#af8a8a'
+    }
 })

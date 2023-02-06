@@ -20,6 +20,7 @@ import {StyleSheet, Text, View} from "react-native";
 import {setAppStatusAC} from "../../reducers/app-reducer";
 import {handleServerNetworkError} from "../../utils/error-utils";
 import {Login} from "../Login/Login";
+import {globalStyles} from "../../../GlobalStyles";
 
 export const TodoLists = () => {
 
@@ -75,14 +76,9 @@ export const TodoLists = () => {
     }
 
     return (
-        <View>
-            <View style={{padding: 5}}>
-                {/*<Text>AddItemForm - не работает</Text>*/}
-                {/*<AddItemForm addItem={addTodolist}/>*/}
-            </View>
+        <View style={{flex: 1, justifyContent: 'space-between'}}>
             {!isLoggedIn && <Login/>}
             <View style={styles.grid}>
-            <Text>TodoLists</Text>
                 <Text>
                     {todoLists.map(tl => {
                         return (
@@ -109,6 +105,9 @@ export const TodoLists = () => {
                     }
                 </Text>
             </View>
+            <View style={[globalStyles.border,{paddingHorizontal: 0}]}>
+                <AddItemForm addItem={addTodolist}/>
+            </View>
         </View>
     );
 };
@@ -117,12 +116,13 @@ const styles = StyleSheet.create({
     grid: {
         display: "flex",
         justifyContent: "center",
-        color: 'white'
+        color: 'white',
     },
     todolistContainer: {
         padding: 20,
-        backgroundColor: "rgba(255, 255, 255, 0.5)",
-        minWidth: 280
+        marginVertical: 10,
+        backgroundColor: "rgba(49,44,44,0.5)",
+        minWidth: 300
     }
 });
 

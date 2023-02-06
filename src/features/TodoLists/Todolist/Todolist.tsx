@@ -5,7 +5,8 @@ import {Task} from "./Task/Task";
 import {FilterValuesType} from "../../../reducers/todolists-reducer";
 import {TaskStatus, TaskType} from "../../../api/todolist-api";
 import {RequestStatusType} from "../../../reducers/app-reducer";
-import {Text, View} from "react-native";
+import {Text, TouchableOpacity, View} from "react-native";
+import {MaterialIcons} from "@expo/vector-icons";
 
 
 type PropsType = {
@@ -30,7 +31,7 @@ export const Todolist = React.memo((props: PropsType) => {
     }, [props.id, props.addTask])
 
     const removeTodolist = useCallback(() => {
-        props.removeTodolist(props.id);
+        // props.removeTodolist(props.id);
     }, [props.id])
     const changeTodolistTitle = useCallback((title: string) => {
         props.changeTodolistTitle(props.id, title);
@@ -51,13 +52,26 @@ export const Todolist = React.memo((props: PropsType) => {
     }
 
     return <View>
+        <View style={{flexDirection: 'row', height: 30, alignItems: 'center', justifyContent: 'center', marginBottom: 10}}>
+            <Text style={{fontSize: 18, fontWeight: '600'}}>
+                <EditableSpan value={props.title} onChange={changeTodolistTitle}/>
+            </Text>
+            {props.entityStatus === "loading"
+                ? <TouchableOpacity style={{marginLeft: 15}}>
+                    <MaterialIcons name="delete-forever" size={24} color="black"/>
+                </TouchableOpacity>
+                : <TouchableOpacity onPress={removeTodolist} style={{marginLeft: 15}}>
+                    <MaterialIcons name="delete-forever" size={24} color="black"/>
+                </TouchableOpacity>
+            }
+        </View>
         {/*<EditableSpan value={props.title} onChange={changeTodolistTitle}/>*/}
-            <Text>Delete Button Todolist</Text>
-            {/*<IconButton aria-label="delete" onClick={removeTodolist} disabled={props.entityStatus === "loading"}>*/}
-            {/*    <Delete/>*/}
-            {/*</IconButton>*/}
-        {/*<AddItemForm addItem={addTask}/>*/}
-        <View>
+        {/*    <Text>Delete Button Todolist</Text>*/}
+        {/*<IconButton aria-label="delete" onClick={removeTodolist} disabled={props.entityStatus === "loading"}>*/}
+        {/*    <Delete/>*/}
+        {/*</IconButton>*/}
+        <AddItemForm addItem={addTask}/>
+        <View style={{paddingVertical: 10}}>
             {
                 tasksForTodolist.map(t => {
                     const removeTask = (taskId: string) => props.removeTask(taskId, props.id)

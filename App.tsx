@@ -1,9 +1,8 @@
-import {Keyboard, StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
-import {ReactElement, ReactNode, useEffect, useState} from "react";
+import {StyleSheet, View} from 'react-native';
+import {useState} from "react";
 import MainApp from "./src/App/MainApp";
 import {Provider} from "react-redux";
 import {store} from "./src/reducers/store";
-import {authAPI, todolistAPI} from "./src/api/todolist-api";
 
 export default function App() {
     const [value, setValue] = useState('')
@@ -68,10 +67,10 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#0F0e17',
-        // backgroundColor: '#ffffff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        // backgroundColor: '#0F0e17',
+        backgroundColor: '#ffffff',
+        // alignItems: 'center',
+        // justifyContent: 'center',
     },
     input: {
         width: '60%',

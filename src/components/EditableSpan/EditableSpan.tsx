@@ -1,5 +1,6 @@
-import React, {ChangeEvent, useState} from 'react';
-import {Text, View} from "react-native";
+import React, {useState} from 'react';
+import {StyleSheet, Text, TextInput, View} from "react-native";
+import {AntDesign} from "@expo/vector-icons";
 
 type EditableSpanPropsType = {
     value: string
@@ -18,12 +19,24 @@ export function EditableSpan(props: EditableSpanPropsType) {
         setEditMode(false);
         props.onChange(title);
     }
-    const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.currentTarget.value)
+    const changeTitle = (e: string) => {
+        setTitle(e)
     }
 
     return editMode
-        // ? <TextField value={title} onChange={changeTitle} autoFocus onBlur={activateViewMode}/>
-        ? <Text>Editable span</Text>
-        : <Text onPress={activateEditMode}>{props.value}</Text>
+        ? <View style={{flexDirection: 'row'}}>
+            <TextInput style={styles.input} onChangeText={changeTitle} value={title}/>
+            <View>
+                <AntDesign name="check" size={24} color="black" onPress={activateViewMode}/>
+            </View>
+        </View>
+        : <Text onPress={activateEditMode} onLongPress={activateEditMode}>{props.value}</Text>
 }
+
+const styles = StyleSheet.create({
+    input: {
+        width: 150,
+        backgroundColor: '#af8a8a'
+    }
+})
+
