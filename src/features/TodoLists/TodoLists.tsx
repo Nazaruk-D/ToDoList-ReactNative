@@ -12,18 +12,14 @@ import {
     FilterValuesType,
     TodolistDomainType
 } from "../../reducers/todolists-reducer";
-import {addTaskTC, fetchTasks, removeTaskTC, updateTaskTC} from "../../reducers/tasks-reducer";
-import {authAPI, TaskStatus, todolistAPI} from "../../api/todolist-api";
+import {addTaskTC, removeTaskTC, updateTaskTC} from "../../reducers/tasks-reducer";
+import {TaskStatus} from "../../api/todolist-api";
 import {TasksStateType} from "../../App/MainApp";
-import {Navigate} from "react-router-dom";
 import {StyleSheet, Text, View} from "react-native";
-import {setAppStatusAC} from "../../reducers/app-reducer";
-import {handleServerNetworkError} from "../../utils/error-utils";
 import {Login} from "../Login/Login";
 import {globalStyles} from "../../../GlobalStyles";
 
 export const TodoLists = () => {
-
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     let todoLists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     let tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
@@ -34,9 +30,7 @@ export const TodoLists = () => {
         if (!isLoggedIn) {
             return
         }
-        // setTimeout(() => {
-            dispatch(fetchTodolistsThunk())
-        // },3000)
+        dispatch(fetchTodolistsThunk())
     }, [])
 
     //todolist:
@@ -76,14 +70,17 @@ export const TodoLists = () => {
     }
 
     return (
-        <View style={{flex: 1, justifyContent: 'space-between'}}>
+        <View style={{flex: 1, justifyContent: 'space-between', marginBottom:30}}>
             {!isLoggedIn && <Login/>}
+            <View style={[styles.addItemBox]}>
+                <AddItemForm addItem={addTodolist}/>
+            </View>
             <View style={styles.grid}>
                 <Text>
                     {todoLists.map(tl => {
                         return (
                             <View key={tl.id} style={{height: "100%", justifyContent: "center"}}>
-                                <View style={[styles.todolistContainer, {backgroundColor: "rgba(255, 255, 255, 0.5)"}]}>
+                                <View style={[styles.todolistContainer, {}]}>
                                     <Todolist
                                         id={tl.id}
                                         title={tl.title}
@@ -105,9 +102,6 @@ export const TodoLists = () => {
                     }
                 </Text>
             </View>
-            <View style={[globalStyles.border,{paddingHorizontal: 0}]}>
-                <AddItemForm addItem={addTodolist}/>
-            </View>
         </View>
     );
 };
@@ -116,13 +110,24 @@ const styles = StyleSheet.create({
     grid: {
         display: "flex",
         justifyContent: "center",
-        color: 'white',
+        color: 'white'
+    },
+    addItemBox: {
+        width: 300,
+        height: 70,
+        backgroundColor: "rgba(255,255,255,0.7)",
+        paddingHorizontal: 0,
+        display: "flex",
+        justifyContent: 'center',
+        paddingLeft: 20,
+        borderRadius: 15
     },
     todolistContainer: {
         padding: 20,
         marginVertical: 10,
-        backgroundColor: "rgba(49,44,44,0.5)",
-        minWidth: 300
+        minWidth: 300,
+        backgroundColor: "rgba(255, 255, 255, 0.7)",
+        borderRadius: 55
     }
 });
 

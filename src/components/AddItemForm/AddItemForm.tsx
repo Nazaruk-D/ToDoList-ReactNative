@@ -24,43 +24,35 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
         setTitle(e)
     }
 
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null);
-        if (e.charCode === 13) {
-            addItem();
-        }
-    }
-
     return <View>
-        {/*<TextField*/}
-        {/*    size={"small"}*/}
-        {/*    variant={"outlined"}*/}
-        {/*    value={title}*/}
-        {/*    onChange={onChangeHandler}*/}
-        {/*    onKeyPress={onKeyPressHandler}*/}
-        {/*    error={!!error}*/}
-        {/*    label={"Title"}*/}
-        {/*    helperText={!!error}*/}
-        {/*    style = {{width: 196, backgroundColor: "rgba(255, 255, 255, 0.5)"}}*/}
-        {/*/>*/}
-        {/*<IconButton aria-label="delete" onClick={addItem}>*/}
-        {/*    <Add/>*/}
-        {/*</IconButton>*/}
-        <View style={{flexDirection: 'row'}}>
-            <TextInput style={styles.input} onChangeText={onChangeHandler} value={title}/>
+        <View style={styles.box}>
+            <TextInput style={styles.input} onChangeText={onChangeHandler} value={title} placeholder={'Enter text'}/>
             <TouchableOpacity>
-                <MaterialIcons name="add" size={24} color="black"/>
+                <MaterialIcons name="add" size={24} color="black" onPress={addItem} style={styles.deleteIcon}/>
             </TouchableOpacity>
         </View>
-
-
         {error && <div className="error-message">{error}</div>}
     </View>
 })
 
 const styles = StyleSheet.create({
+    box: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+    deleteIcon: {
+        backgroundColor: "rgba(255, 255, 255, 0.5)",
+        borderRadius: 50
+    },
     input: {
-        width: 150,
-        backgroundColor: '#af8a8a'
-    }
+        width: '80%',
+        height: 30,
+        backgroundColor: '#3a2d4b',
+        paddingLeft: 10,
+        color: 'white',
+        textDecorationColor: 'white',
+        marginRight: 20,
+        borderRadius: 10
+    },
 })

@@ -3,10 +3,8 @@ import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from "../reducers/store";
 import {TaskType} from "../api/todolist-api";
 import {initializeAppTC} from "../reducers/app-reducer";
-import {Navigate, Route, Routes, useRoutes} from "react-router-dom";
 import {TodoLists} from "../features/TodoLists/TodoLists";
-import Page404 from "../components/Page404/Page404";
-import {StyleSheet, Text, View} from "react-native";
+import {ImageBackground, ScrollView, StyleSheet, Text, View} from "react-native";
 
 export type TasksStateType = {
     [key: string]: Array<TaskType>
@@ -33,21 +31,39 @@ function MainApp() {
     //     {path: '*', element: <Navigate to="/404"/>},
     // ])
     // return routes
+    const image = {uri: "https://sun9-67.userapi.com/impg/GuUb0aTcpvq21WRK6P3S-UXEKsZ98CbvUlpsCA/bYRcwosii0M.jpg?size=1024x1024&quality=95&sign=24a0919d4052bade4d17062f9cb79e49&type=album"};
+
     return (
-        <View style={{flex: 1, backgroundColor: 'blue', display: 'flex', alignItems: 'center', paddingTop: 40}}>
-            <TodoLists/>
-        </View>
+        <ImageBackground source={image} style={styles.image}>
+            <ScrollView style={styles.todolist}>
+                <View style={{alignItems:'center'}}>
+                    <TodoLists/>
+                </View>
+            </ScrollView>
+        </ImageBackground>
+
     );
 }
 
 
 const styles = StyleSheet.create({
+    todolist: {
+        flex: 1,
+        display: 'flex',
+        paddingTop: 30,
+        marginBottom: 30
+    },
     test: {
         position: 'absolute',
         top: '30%',
         textAlign: 'center',
         width: '100%'
     },
+    image: {
+        flex: 1,
+        resizeMode: 'cover',
+        justifyContent: 'center',
+    }
 });
 
 export default MainApp;

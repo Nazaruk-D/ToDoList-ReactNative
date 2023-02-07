@@ -4,6 +4,6 @@ export const globalStyles = StyleSheet.create({
     border: {
         borderStyle: 'solid',
         borderWidth: 1,
-        borderColor: 'red'
+        borderColor: 'grey'
     }
 })

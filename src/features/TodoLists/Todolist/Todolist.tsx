@@ -5,7 +5,7 @@ import {Task} from "./Task/Task";
 import {FilterValuesType} from "../../../reducers/todolists-reducer";
 import {TaskStatus, TaskType} from "../../../api/todolist-api";
 import {RequestStatusType} from "../../../reducers/app-reducer";
-import {Text, TouchableOpacity, View} from "react-native";
+import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {MaterialIcons} from "@expo/vector-icons";
 
 
@@ -31,7 +31,7 @@ export const Todolist = React.memo((props: PropsType) => {
     }, [props.id, props.addTask])
 
     const removeTodolist = useCallback(() => {
-        // props.removeTodolist(props.id);
+        props.removeTodolist(props.id);
     }, [props.id])
     const changeTodolistTitle = useCallback((title: string) => {
         props.changeTodolistTitle(props.id, title);
@@ -52,7 +52,7 @@ export const Todolist = React.memo((props: PropsType) => {
     }
 
     return <View>
-        <View style={{flexDirection: 'row', height: 30, alignItems: 'center', justifyContent: 'center', marginBottom: 10}}>
+        <View style={styles.todolist}>
             <Text style={{fontSize: 18, fontWeight: '600'}}>
                 <EditableSpan value={props.title} onChange={changeTodolistTitle}/>
             </Text>
@@ -65,12 +65,9 @@ export const Todolist = React.memo((props: PropsType) => {
                 </TouchableOpacity>
             }
         </View>
-        {/*<EditableSpan value={props.title} onChange={changeTodolistTitle}/>*/}
-        {/*    <Text>Delete Button Todolist</Text>*/}
-        {/*<IconButton aria-label="delete" onClick={removeTodolist} disabled={props.entityStatus === "loading"}>*/}
-        {/*    <Delete/>*/}
-        {/*</IconButton>*/}
-        <AddItemForm addItem={addTask}/>
+        <View style={{}}>
+            <AddItemForm addItem={addTask}/>
+        </View>
         <View style={{paddingVertical: 10}}>
             {
                 tasksForTodolist.map(t => {
@@ -94,5 +91,19 @@ export const Todolist = React.memo((props: PropsType) => {
         </View>
     </View>
 })
+
+
+const styles = StyleSheet.create({
+    todolist: {
+        flexDirection: 'row',
+        height: 30,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 10,
+    }
+});
+
+
+
 
 

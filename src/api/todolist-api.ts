@@ -48,7 +48,6 @@ export const authAPI = {
         return instance.delete<ResponseType>(`auth/login`)
     },
     me(){
-        console.log(1)
         return instance.get(`auth/me`)
     }
 }

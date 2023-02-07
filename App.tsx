@@ -1,12 +1,13 @@
-import {Button, StyleSheet, Text, View} from 'react-native';
-import {useState} from "react";
+import {ImageBackground, StyleSheet, View} from 'react-native';
+import React, {useState} from "react";
 import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaProvider} from "react-native-safe-area-context";
-import WithSafeAreaView from "./src/components/ComponentHelper/WithSafeAreaView";
-import {ProfileProps, RootStackParamList, UserProps} from "./src/Type/NavigationType";
+import {RootStackParamList} from "./src/Type/NavigationType";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import RootAuth from "./src/Screens/AuthScreens/RootAuth";
-
+import MainApp from "./src/App/MainApp";
+import {Provider} from "react-redux";
+import {store} from "./src/reducers/store";
 
 // function HomeScreen({navigation}: HomeProps) {
 //     return (
@@ -19,27 +20,27 @@ import RootAuth from "./src/Screens/AuthScreens/RootAuth";
 //     );
 // }
 
-function ProfileScreen({navigation}: ProfileProps) {
-    return (
-        <WithSafeAreaView>
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-between'}}>
-                <Text>Profile Screen</Text>
-                <Button title={'change page'} onPress={() => navigation.navigate('User')}/>
-            </View>
-        </WithSafeAreaView>
-    );
-}
-
-function UserScreen({navigation}: UserProps) {
-    return (
-        <WithSafeAreaView>
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-between'}}>
-                <Text>User Screen</Text>
-                <Button title={'change page'} onPress={() => navigation.navigate('Auth', {screen: 'Login'})}/>
-            </View>
-        </WithSafeAreaView>
-    );
-}
+// function ProfileScreen({navigation}: ProfileProps) {
+//     return (
+//         <WithSafeAreaView>
+//             <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-between'}}>
+//                 <Text>Profile Screen</Text>
+//                 {/*<Button title={'change page'} onPress={() => navigation.navigate('User')}/>*/}
+//             </View>
+//         </WithSafeAreaView>
+//     );
+// }
+//
+// function UserScreen({navigation}: any) {
+//     return (
+//         <WithSafeAreaView>
+//             <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-between'}}>
+//                 <Text>User Screen</Text>
+//                 <Button title={'change page'} onPress={() => navigation.navigate('Auth', {screen: 'Login'})}/>
+//             </View>
+//         </WithSafeAreaView>
+//     );
+// }
 
 // const Stack = createNativeStackNavigator<RootStackParamList>();
 const Stack = createBottomTabNavigator<RootStackParamList>();
@@ -90,19 +91,17 @@ export default function App() {
             {/*        </View>*/}
             {/*    })}*/}
             {/*</View>*/}
-
-            {/*<Provider store={store}>*/}
-            {/*    <MainApp/>*/}
-            {/*</Provider>*/}
-            <SafeAreaProvider>
-                <NavigationContainer>
-                    <Stack.Navigator>
-                        <Stack.Screen name="Auth" component={RootAuth}/>
-                        <Stack.Screen name="Profile" component={ProfileScreen}/>
-                        <Stack.Screen name="User" component={UserScreen}/>
-                    </Stack.Navigator>
-                </NavigationContainer>
-            </SafeAreaProvider>
+                <Provider store={store}>
+                    <SafeAreaProvider>
+                        <NavigationContainer>
+                            <Stack.Navigator>
+                                <Stack.Screen name="Main" component={MainApp}/>
+                                <Stack.Screen name="Auth" component={RootAuth}/>
+                                {/*<Stack.Screen name="Profile" component={ProfileScreen}/>*/}
+                            </Stack.Navigator>
+                        </NavigationContainer>
+                    </SafeAreaProvider>
+                </Provider>
         </View>
     );
 }
@@ -117,8 +116,9 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        // height: 1200
         // backgroundColor: '#0F0e17',
-        backgroundColor: '#ffffff',
+        // backgroundColor: '#ffffff',
         // alignItems: 'center',
         // justifyContent: 'center',
     },
@@ -131,12 +131,12 @@ const styles = StyleSheet.create({
     },
     boxTask: {
         flexDirection: 'row',
-        backgroundColor: '#fff',
+        backgroundColor: '#ff0000',
         justifyContent: "space-between",
         paddingVertical: 4,
         paddingHorizontal: 20,
         marginVertical: 3,
-    }
+    },
 });
 
 const globalStyles = StyleSheet.create({
