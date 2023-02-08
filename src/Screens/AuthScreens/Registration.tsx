@@ -7,7 +7,7 @@ const Registration = ({route ,navigation}: RootAuthScreenProps) => {
     return (
         <View style={[globalStyles.center]}>
             <Text>Registration</Text>
-            <Button title={'go to User'} onPress={() => navigation.navigate('User')}/>
+            {/*<Button title={'go to User'} onPress={() => navigation.navigate('User')}/>*/}
             <Text>{JSON.stringify(route.params, null, 2)}</Text>
         </View>
     );

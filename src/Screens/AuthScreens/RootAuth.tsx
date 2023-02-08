@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Button, Text, View} from "react-native";
 import {createStackNavigator} from "@react-navigation/stack";
 import Login from "./Login";
@@ -8,6 +8,7 @@ import {AuthProps, RootAuthScreenProps} from "../../Type/NavigationType";
 const Stack = createStackNavigator()
 
 const RootAuth = () => {
+    // const backGround = useContext("");
     return (
         <Stack.Navigator>
             <Stack.Screen name={'Login'} component={Login}/>

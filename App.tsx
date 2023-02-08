@@ -3,11 +3,12 @@ import React, {useState} from "react";
 import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaProvider} from "react-native-safe-area-context";
 import {RootStackParamList} from "./src/Type/NavigationType";
-import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import RootAuth from "./src/Screens/AuthScreens/RootAuth";
 import MainApp from "./src/App/MainApp";
 import {Provider} from "react-redux";
 import {store} from "./src/reducers/store";
+import {createMaterialBottomTabNavigator} from "@react-navigation/material-bottom-tabs";
+import {Feather, MaterialCommunityIcons} from "@expo/vector-icons";
 
 // function HomeScreen({navigation}: HomeProps) {
 //     return (
@@ -43,7 +44,8 @@ import {store} from "./src/reducers/store";
 // }
 
 // const Stack = createNativeStackNavigator<RootStackParamList>();
-const Stack = createBottomTabNavigator<RootStackParamList>();
+// const Stack = createBottomTabNavigator<RootStackParamList>();
+const Stack = createMaterialBottomTabNavigator<RootStackParamList>();
 
 export default function App() {
     const [value, setValue] = useState('')
@@ -71,6 +73,13 @@ export default function App() {
         setShow(0)
     }
 
+    const [backGroundImage, setBackGroundImage] = useState<{ uri: string }>({
+        uri: "https://sun9-67.userapi.com/impg/GuUb0aTcpvq21WRK6P3S-UXEKsZ98CbvUlpsCA/bYRcwosii0M.jpg?size=1024x1024&quality=95&sign=24a0919d4052bade4d17062f9cb79e49&type=album"
+    })
+
+    const ThemeContext = React.createContext<string>(backGroundImage.uri);
+    const image = {uri: "https://sun9-67.userapi.com/impg/GuUb0aTcpvq21WRK6P3S-UXEKsZ98CbvUlpsCA/bYRcwosii0M.jpg?size=1024x1024&quality=95&sign=24a0919d4052bade4d17062f9cb79e49&type=album"};
+
     return (
         <View style={styles.container}>
             {/*<HideKeyboard>*/}
@@ -91,17 +100,52 @@ export default function App() {
             {/*        </View>*/}
             {/*    })}*/}
             {/*</View>*/}
-                <Provider store={store}>
-                    <SafeAreaProvider>
-                        <NavigationContainer>
-                            <Stack.Navigator>
-                                <Stack.Screen name="Main" component={MainApp}/>
-                                <Stack.Screen name="Auth" component={RootAuth}/>
-                                {/*<Stack.Screen name="Profile" component={ProfileScreen}/>*/}
-                            </Stack.Navigator>
-                        </NavigationContainer>
-                    </SafeAreaProvider>
-                </Provider>
+            <Provider store={store}>
+                {/*<ImageBackground source={image} style={styles.image}>*/}
+                {/*<ThemeContext.Provider value={backGroundImage.uri}>*/}
+                <SafeAreaProvider>
+                    <NavigationContainer>
+                        <Stack.Navigator initialRouteName="Home"
+                                         activeColor="#f0edf6"
+                                         inactiveColor="#3e2465"
+                                         barStyle={{backgroundColor: '#bea143'}}>
+
+                            <Stack.Screen name="Home"
+                                          component={MainApp}
+                                          options={{
+                                              tabBarLabel: 'Home',
+                                              tabBarIcon: ({color}) => (
+                                                  <MaterialCommunityIcons name="home" color={color} size={26}/>
+                                              ),
+                                          }}
+                            />
+                            <Stack.Screen
+                                name="Auth"
+                                component={RootAuth}
+                                options={{
+                                    tabBarLabel: 'Auth',
+                                    tabBarIcon: ({color}) => (
+                                        <MaterialCommunityIcons name="login" size={24} color={color}/>
+                                    ),
+                                }}
+                            />
+                            <Stack.Screen
+                                name="Settings"
+                                component={RootAuth}
+                                options={{
+                                    tabBarLabel: 'Settings',
+                                    tabBarIcon: ({color}) => (
+                                        <Feather name="settings" size={24} color={color}/>
+                                    ),
+                                }}
+                            />
+                            {/*<Stack.Screen name="Profile" component={ProfileScreen}/>*/}
+                        </Stack.Navigator>
+                    </NavigationContainer>
+                </SafeAreaProvider>
+                {/*</ThemeContext.Provider>*/}
+                {/*</ImageBackground>*/}
+            </Provider>
         </View>
     );
 }
@@ -137,6 +181,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         marginVertical: 3,
     },
+    image: {
+        flex: 1,
+        resizeMode: 'cover',
+        justifyContent: 'center',
+        zIndex: 10
+    }
 });
 
 const globalStyles = StyleSheet.create({

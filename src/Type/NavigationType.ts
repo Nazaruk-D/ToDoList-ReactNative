@@ -4,9 +4,9 @@ import {BottomTabScreenProps} from "@react-navigation/bottom-tabs";
 import {StackScreenProps} from "@react-navigation/stack";
 
 export type RootStackParamList = {
-    Main: undefined;
+    Home: undefined;
     Auth: NavigatorScreenParams<RootAuthParamList>;
-    Profile: undefined;
+    Settings: undefined;
 };
 
 export type RootAuthParamList = {
@@ -14,8 +14,8 @@ export type RootAuthParamList = {
     Login: undefined;
 };
 
-export type ProfileProps = NativeStackScreenProps<RootStackParamList, 'Profile'>;
+export type ProfileProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 export type AuthProps = NativeStackScreenProps<RootStackParamList, 'Auth'>;
-export type MainProps = NativeStackScreenProps<RootStackParamList, 'Main'>;
+export type MainProps = NativeStackScreenProps<RootStackParamList, 'Settings'>;
 
 export type RootAuthScreenProps = CompositeScreenProps<BottomTabScreenProps<RootStackParamList, 'Auth'>, StackScreenProps<RootAuthParamList> >

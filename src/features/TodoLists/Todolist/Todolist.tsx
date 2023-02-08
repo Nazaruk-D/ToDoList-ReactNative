@@ -7,6 +7,7 @@ import {TaskStatus, TaskType} from "../../../api/todolist-api";
 import {RequestStatusType} from "../../../reducers/app-reducer";
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {MaterialIcons} from "@expo/vector-icons";
+import FilterButton from "../../../components/FilterButton/FilterButton";
 
 
 type PropsType = {
@@ -84,10 +85,10 @@ export const Todolist = React.memo((props: PropsType) => {
                 })
             }
         </View>
-        <View>
-            {/*<Text>Button</Text>*/}
-            {/*<Text>Button</Text>*/}
-            {/*<Text>Button</Text>*/}
+        <View style={styles.buttonBlock}>
+            <FilterButton title={'Completed'} onPress={onCompletedClickHandler}/>
+            <FilterButton title={'Active'} onPress={onActiveClickHandler}/>
+            <FilterButton title={'All'} onPress={onAllClickHandler}/>
         </View>
     </View>
 })
@@ -100,6 +101,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: 10,
+    },
+    buttonBlock: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly'
     }
 });
 

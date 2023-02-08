@@ -10,7 +10,7 @@ export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
-function MainApp() {
+function MainApp({...props}) {
     const dispatch = useAppDispatch()
     const isInitialized = useSelector<AppRootStateType, boolean>(store => store.app.initialized)
 

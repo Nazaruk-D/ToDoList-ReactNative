@@ -120,7 +120,8 @@ const styles = StyleSheet.create({
         display: "flex",
         justifyContent: 'center',
         paddingLeft: 20,
-        borderRadius: 15
+        borderRadius: 15,
+        marginBottom: 15
     },
     todolistContainer: {
         padding: 20,
