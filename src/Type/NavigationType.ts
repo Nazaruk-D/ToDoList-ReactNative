@@ -5,17 +5,13 @@ import {StackScreenProps} from "@react-navigation/stack";
 
 export type RootStackParamList = {
     Home: undefined;
-    Auth: NavigatorScreenParams<RootAuthParamList>;
-    Settings: undefined;
-};
-
-export type RootAuthParamList = {
-    Registration: {id: number, name: string} | undefined;
     Login: undefined;
+    Logout: undefined;
+    Profile: undefined;
 };
 
-export type ProfileProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
-export type AuthProps = NativeStackScreenProps<RootStackParamList, 'Auth'>;
-export type MainProps = NativeStackScreenProps<RootStackParamList, 'Settings'>;
+export type MainProps  = NativeStackScreenProps<RootStackParamList, 'Home'>;
+export type LoginProps = NativeStackScreenProps<RootStackParamList, 'Login'>;
+export type LogoutProps = NativeStackScreenProps<RootStackParamList, 'Logout'>;
+export type ProfileProps = NativeStackScreenProps<RootStackParamList, 'Profile'>;
 
-export type RootAuthScreenProps = CompositeScreenProps<BottomTabScreenProps<RootStackParamList, 'Auth'>, StackScreenProps<RootAuthParamList> >

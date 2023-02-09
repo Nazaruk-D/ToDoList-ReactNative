@@ -99,24 +99,23 @@
 
 import {useAppDispatch, useAppSelector} from "../../reducers/store";
 import {loginTC} from "./auth-reducer";
-import {Navigate} from "react-router-dom";
 import React from "react";
-import {Button, TextInput, View} from "react-native";
+import {Button, View} from "react-native";
 
-export const Login = () => {
-    const dispatch = useAppDispatch()
-    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-
-    const onSubmit = () => {
-        const values = {
-            email: 'nazaruk-dima@mail.ru',
-            password: 'power3562308',
-            rememberMe: true
-        }
-            dispatch(loginTC(values))
-        }
-
-    return <View>
-            <Button onPress={onSubmit} title={'add'}></Button>
-        </View>
-}
+// export const Login = () => {
+//     const dispatch = useAppDispatch()
+//     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+//
+//     const onSubmit = () => {
+//         const values = {
+//             email: 'nazaruk-dima@mail.ru',
+//             password: 'power3562308',
+//             rememberMe: true
+//         }
+//             dispatch(loginTC(values))
+//         }
+//
+//     return <View>
+//             <Button onPress={onSubmit} title={'add'}></Button>
+//         </View>
+// }

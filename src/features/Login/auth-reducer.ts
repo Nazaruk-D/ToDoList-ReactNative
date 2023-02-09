@@ -2,7 +2,7 @@ import {setAppStatusAC} from "../../reducers/app-reducer";
 import {authAPI, LoginParamsType, StatusCode} from "../../api/todolist-api";
 import {AxiosError} from "axios";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
-import {clearTodosDataAC} from "../../reducers/todolists-reducer";
+import {clearTodosDataAC, fetchTodolistsThunk} from "../../reducers/todolists-reducer";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 
@@ -11,6 +11,7 @@ export const loginTC = createAsyncThunk<undefined, LoginParamsType, { rejectValu
         try {
             const res = await authAPI.login(param)
             if (res.data.resultCode === StatusCode.OK) {
+                thunkAPI.dispatch(fetchTodolistsThunk()) //добавил
                 thunkAPI.dispatch(setAppStatusAC({status: 'succeeded'}))
                 return
             } else {
@@ -31,7 +32,6 @@ export const logoutTC = createAsyncThunk(('auth/logout'), async (param, thunkAPI
         try {
             const res = await authAPI.logout()
             if (res.data.resultCode === StatusCode.OK) {
-                // thunkAPI.dispatch(setIsLoggedInAC({value: false}))
                 thunkAPI.dispatch(setAppStatusAC({status: 'succeeded'}))
                 thunkAPI.dispatch(clearTodosDataAC())
                 return

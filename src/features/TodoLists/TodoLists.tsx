@@ -16,13 +16,11 @@ import {addTaskTC, removeTaskTC, updateTaskTC} from "../../reducers/tasks-reduce
 import {TaskStatus} from "../../api/todolist-api";
 import {TasksStateType} from "../../App/MainApp";
 import {StyleSheet, Text, View} from "react-native";
-import {Login} from "../Login/Login";
-import {globalStyles} from "../../../GlobalStyles";
 
 export const TodoLists = () => {
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-    let todoLists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
-    let tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
+    const todoLists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
+    const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
 
     const dispatch = useAppDispatch()
 
@@ -71,7 +69,7 @@ export const TodoLists = () => {
 
     return (
         <View style={{flex: 1, justifyContent: 'space-between', marginBottom:30}}>
-            {!isLoggedIn && <Login/>}
+            {/*{!isLoggedIn && <Login/>}*/}
             <View style={[styles.addItemBox]}>
                 <AddItemForm addItem={addTodolist}/>
             </View>
@@ -131,6 +129,5 @@ const styles = StyleSheet.create({
         borderRadius: 55
     }
 });
-
 
 

@@ -6,6 +6,7 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {appReducer} from "./app-reducer";
 import {authReducer} from "../features/Login/auth-reducer";
 import {configureStore} from "@reduxjs/toolkit";
+import {profileReducer} from "./profile-reducer";
 
 
 // объединяя reducer-ы с помощью combineReducers,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolists: todolistsreducer,
     app: appReducer,
-    auth: authReducer
+    auth: authReducer,
+    profile: profileReducer
 })
 // непосредственно создаём store
 // export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
