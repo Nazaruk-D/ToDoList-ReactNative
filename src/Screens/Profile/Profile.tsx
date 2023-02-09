@@ -7,8 +7,8 @@ import {ProfileProps} from "../../Type/NavigationType";
 
 
 const img = {
-    width: 100,
-    height: 100,
+    width: 120,
+    height: 120,
     uri: 'https://sun9-16.userapi.com/impg/AN-ikCmTp9yLRpLCkoACsL5dMQC9PfxIv9sX-g/zJ5bKUy8JMk.jpg?size=1080x1920&quality=95&sign=0da9f7871dde6f0032cc304b2cd2dec7&type=album'
 }
 
@@ -44,8 +44,8 @@ const Profile = ({route, navigation}: ProfileProps) => {
                         <View>
                             <Text>Login name: <Text style={{fontWeight: "600"}}>{profileInfo.fullName}</Text> </Text>
                             <Text>Id:  <Text style={{fontWeight: "600"}}>{profileInfo.userId}</Text></Text>
-                            <TextInput onChangeText={setUrl} value={url} placeholder={'URL link'}/>
-                            <Button title={'change background image'} onPress={onPressHandler}/>
+                            <TextInput style={styles.input} onChangeText={setUrl} value={url} placeholder={'URL link'}/>
+                            <Button title={'change background image'} onPress={onPressHandler} color={'#3e2465'}/>
                         </View>
                     </View>
                 </View>
@@ -86,8 +86,17 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     img: {
-        borderRadius: 50
-    }
+        borderRadius: 100,
+        borderStyle: 'solid',
+        borderWidth: 5,
+        borderColor: '#bea143'
+    },
+    input: {
+        backgroundColor: '#bea143',
+        paddingLeft: 10,
+        width: '100%',
+        marginVertical: 10
+    },
 
 });
 

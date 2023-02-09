@@ -12,21 +12,7 @@ export type TasksStateType = {
 }
 
 function MainApp({route, navigation}: MainProps) {
-    const dispatch = useAppDispatch()
-    const isInitialized = useSelector<AppRootStateType, boolean>(store => store.app.initialized)
-    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const backgroundImage = useAppSelector( store => store.app.backgroundImage)
-
-    useEffect(() => {
-        dispatch(initializeAppTC())
-    }, [])
-
-    if (!isInitialized) {
-        return <Text style={styles.progress}>
-            {/*<CircularProgress/>*/}
-            CircularProgress
-        </Text>
-    }
 
     return (
         <ImageBackground source={backgroundImage} style={styles.image}>

@@ -11,6 +11,7 @@ export const initializeAppTC = createAsyncThunk(('app/initializeApp'), async (pa
             return {id: res.data.data.id}
         } else {
             handleServerAppError(res.data, dispatch)
+            return {id: null}
         }
     } catch (err: any) {
         handleServerNetworkError(err, dispatch)

@@ -1,12 +1,12 @@
 import {StyleSheet, View} from 'react-native';
-import React from "react";
+import React, {useEffect} from "react";
 import {Provider} from "react-redux";
-import {store} from "./src/reducers/store";
+import {store, useAppDispatch} from "./src/reducers/store";
 import Navigation from "./src/Navigation/Navigation";
+import {initializeAppTC} from "./src/reducers/app-reducer";
 
 
 export default function App() {
-
     return (
         <View style={styles.container}>
             <Provider store={store}>

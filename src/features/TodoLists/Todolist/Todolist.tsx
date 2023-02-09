@@ -86,9 +86,9 @@ export const Todolist = React.memo((props: PropsType) => {
             }
         </View>
         <View style={styles.buttonBlock}>
-            <FilterButton title={'Completed'} onPress={onCompletedClickHandler}/>
-            <FilterButton title={'Active'} onPress={onActiveClickHandler}/>
-            <FilterButton title={'All'} onPress={onAllClickHandler}/>
+            <FilterButton title={'Completed'} onPress={onCompletedClickHandler} active={props.filter === "completed"}/>
+            <FilterButton title={'Active'} onPress={onActiveClickHandler} active={props.filter === "active"}/>
+            <FilterButton title={'All'} onPress={onAllClickHandler} active={props.filter === "all"}/>
         </View>
     </View>
 })

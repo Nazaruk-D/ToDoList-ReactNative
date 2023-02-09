@@ -1,4 +1,4 @@
-import {setAppStatusAC} from "../../reducers/app-reducer";
+import {initializeAppTC, setAppStatusAC} from "../../reducers/app-reducer";
 import {authAPI, LoginParamsType, StatusCode} from "../../api/todolist-api";
 import {AxiosError} from "axios";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
@@ -13,6 +13,7 @@ export const loginTC = createAsyncThunk<undefined, LoginParamsType, { rejectValu
             if (res.data.resultCode === StatusCode.OK) {
                 thunkAPI.dispatch(fetchTodolistsThunk()) //добавил
                 thunkAPI.dispatch(setAppStatusAC({status: 'succeeded'}))
+                thunkAPI.dispatch(initializeAppTC())
                 return
             } else {
                 handleServerAppError(res.data, thunkAPI.dispatch)

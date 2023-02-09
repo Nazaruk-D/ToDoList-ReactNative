@@ -6,20 +6,37 @@ import Profile from "../Screens/Profile/Profile";
 import {SafeAreaProvider} from "react-native-safe-area-context";
 import {createMaterialBottomTabNavigator} from "@react-navigation/material-bottom-tabs";
 import {RootStackParamList} from "../Type/NavigationType";
-import {useAppSelector} from "../reducers/store";
+import {AppRootStateType, useAppDispatch, useAppSelector} from "../reducers/store";
 import Login from "../Screens/Login/Login";
 import Logout from "../Screens/Logout/Logout";
+import {initializeAppTC} from "../reducers/app-reducer";
+import {ActivityIndicator, StyleSheet, Text, View} from "react-native";
+import {useSelector} from "react-redux";
 
 
 const Stack = createMaterialBottomTabNavigator<RootStackParamList>();
 
 const Navigation = () => {
     const isLogin = useAppSelector(store => store.auth.isLoggedIn)
+    const isInitialized = useSelector<AppRootStateType, boolean>(store => store.app.initialized)
+    const dispatch = useAppDispatch()
     let startPage;
+
+
+    useEffect(() => {
+        dispatch(initializeAppTC())
+    }, [isInitialized])
 
     useEffect(() => {
         startPage = isLogin ? 'Home' : 'Login'
     }, [isLogin])
+
+
+    if (!isInitialized) {
+        return <View style={styles.progress}>
+            <ActivityIndicator size="large" color="#3e2465"/>
+        </View>
+    }
 
     return (
         <SafeAreaProvider>
@@ -78,5 +95,15 @@ const Navigation = () => {
         </SafeAreaProvider>
     );
 };
+
+const styles = StyleSheet.create({
+    progress: {
+        position: 'absolute',
+        top: '50%',
+        textAlign: 'center',
+        width: '100%',
+        fontSize: 30
+    }
+});
 
 export default Navigation;

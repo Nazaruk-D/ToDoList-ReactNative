@@ -18,7 +18,7 @@ const Logout = ({route, navigation}: LogoutProps) => {
             <View style={styles.settingsContainer}>
                 <View style={styles.settingsBlock}>
                         <View>
-                            <Button color={"#3e2465"} title={'Logout'} onPress={onPressHandler}/>
+                            <Button color={'#3e2465'} title={'Logout'} onPress={onPressHandler}/>
                         </View>
                 </View>
             </View>

@@ -69,7 +69,6 @@ export const TodoLists = () => {
 
     return (
         <View style={{flex: 1, justifyContent: 'space-between', marginBottom:30}}>
-            {/*{!isLoggedIn && <Login/>}*/}
             <View style={[styles.addItemBox]}>
                 <AddItemForm addItem={addTodolist}/>
             </View>
