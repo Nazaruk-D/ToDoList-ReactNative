@@ -40,7 +40,7 @@ export const TodoLists = () => {
         dispatch(action)
     }, [dispatch])
 
-    function changeTodolistTitle(id: string, title: string) {
+    const changeTodolistTitle = (id: string, title: string) => {
         dispatch(changeTodolistTitleTC({title, id}))
     }
 
@@ -63,10 +63,6 @@ export const TodoLists = () => {
         dispatch(updateTaskTC({todoId, domainModel: {status}, taskId}))
     }, [dispatch])
 
-    if (!isLoggedIn) {
-        // return <Navigate to={"/login"}/>
-    }
-
     return (
         <View style={{flex: 1, justifyContent: 'space-between', marginBottom:30}}>
             <View style={[styles.addItemBox]}>
@@ -77,7 +73,7 @@ export const TodoLists = () => {
                     {todoLists.map(tl => {
                         return (
                             <View key={tl.id} style={{height: "100%", justifyContent: "center"}}>
-                                <View style={[styles.todolistContainer, {}]}>
+                                <View style={[styles.todolistContainer]}>
                                     <Todolist
                                         id={tl.id}
                                         title={tl.title}

@@ -4,33 +4,33 @@ import {getProfileInfo} from "../../reducers/profile-reducer";
 import {useAppDispatch, useAppSelector} from "../../reducers/store";
 import {setNewBackgroundImage} from "../../reducers/app-reducer";
 import {ProfileProps} from "../../Type/NavigationType";
+import LoadingIndicator from "../../components/LoadingIndicator/LoadingIndicator";
 
-
-const img = {
-    width: 120,
-    height: 120,
-    uri: 'https://sun9-16.userapi.com/impg/AN-ikCmTp9yLRpLCkoACsL5dMQC9PfxIv9sX-g/zJ5bKUy8JMk.jpg?size=1080x1920&quality=95&sign=0da9f7871dde6f0032cc304b2cd2dec7&type=album'
-}
 
 const Profile = ({route, navigation}: ProfileProps) => {
     const dispatch = useAppDispatch()
-    const userId = useAppSelector( s => s.app.userId)
-    const profileInfo = useAppSelector( s => s.profile.userInfo)
+    const userId = useAppSelector(s => s.app.userId)
+    const profileInfo = useAppSelector(s => s.profile.userInfo)
     const backgroundImage = useAppSelector(store => store.app.backgroundImage)
-
     let [url, setUrl] = useState<string>("")
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getProfileInfo(userId!))
-    },[])
+    }, [])
 
     const onPressHandler = () => {
         dispatch(setNewBackgroundImage({url}))
         setUrl("")
     }
 
-    if(profileInfo.photos.small === '') {
-        return <Text>Loading...</Text>
+    const img = {
+        width: 120,
+        height: 120,
+        uri: profileInfo.photos.small ? profileInfo.photos.small : 'https://sun9-8.userapi.com/impg/PQbI4nn--y6Ig5WN_d3o938Zi2qTF_3nfGn_LQ/5jZFSI6xofo.jpg?size=200x200&quality=96&sign=201bca872cd1956597e13db1a4cd7bfd&type=album'
+    }
+
+    if (profileInfo.photos.small === '') {
+        return <LoadingIndicator/>
     }
 
     return (
@@ -39,11 +39,11 @@ const Profile = ({route, navigation}: ProfileProps) => {
                 <View style={styles.settingsBlock}>
                     <View style={styles.settings}>
                         <View style={styles.avatar}>
-                            <Image source={profileInfo.photos.large ? img : img} style={styles.img}/>
+                            <Image source={img} style={styles.img}/>
                         </View>
                         <View>
                             <Text>Login name: <Text style={{fontWeight: "600"}}>{profileInfo.fullName}</Text> </Text>
-                            <Text>Id:  <Text style={{fontWeight: "600"}}>{profileInfo.userId}</Text></Text>
+                            <Text>Id: <Text style={{fontWeight: "600"}}>{profileInfo.userId}</Text></Text>
                             <TextInput style={styles.input} onChangeText={setUrl} value={url} placeholder={'URL link'}/>
                             <Button title={'change background image'} onPress={onPressHandler} color={'#3e2465'}/>
                         </View>
@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
         width: '100%',
         marginVertical: 10
     },
-
 });
 
 export default Profile;

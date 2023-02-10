@@ -1,10 +1,8 @@
-import React, {useEffect} from 'react';
-import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch, useAppSelector} from "../reducers/store";
+import React from 'react';
+import {useAppSelector} from "../reducers/store";
 import {TaskType} from "../api/todolist-api";
-import {initializeAppTC} from "../reducers/app-reducer";
 import {TodoLists} from "../features/TodoLists/TodoLists";
-import {ImageBackground, ScrollView, StyleSheet, Text, View} from "react-native";
+import {ImageBackground, ScrollView, StyleSheet, View} from "react-native";
 import {MainProps} from "../Type/NavigationType";
 
 export type TasksStateType = {
@@ -12,12 +10,12 @@ export type TasksStateType = {
 }
 
 function MainApp({route, navigation}: MainProps) {
-    const backgroundImage = useAppSelector( store => store.app.backgroundImage)
+    const backgroundImage = useAppSelector(store => store.app.backgroundImage)
 
     return (
         <ImageBackground source={backgroundImage} style={styles.image}>
             <ScrollView style={styles.todolist}>
-                <View style={{alignItems:'center'}}>
+                <View style={{alignItems: 'center'}}>
                     <TodoLists/>
                 </View>
             </ScrollView>
@@ -26,19 +24,12 @@ function MainApp({route, navigation}: MainProps) {
     );
 }
 
-
 const styles = StyleSheet.create({
     todolist: {
         flex: 1,
         display: 'flex',
         paddingTop: 30,
         marginBottom: 30
-    },
-    progress: {
-        position: 'absolute',
-        top: '30%',
-        textAlign: 'center',
-        width: '100%'
     },
     image: {
         flex: 1,

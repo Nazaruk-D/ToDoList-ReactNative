@@ -6,8 +6,9 @@ import {FilterValuesType} from "../../../reducers/todolists-reducer";
 import {TaskStatus, TaskType} from "../../../api/todolist-api";
 import {RequestStatusType} from "../../../reducers/app-reducer";
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import {MaterialIcons} from "@expo/vector-icons";
 import FilterButton from "../../../components/FilterButton/FilterButton";
+import LoadingSmallIndicator from "../../../components/LoadingSmallIndicator/LoadingSmallIndicator";
+import {MaterialIcons} from "@expo/vector-icons";
 
 
 type PropsType = {
@@ -52,15 +53,15 @@ export const Todolist = React.memo((props: PropsType) => {
         tasksForTodolist = tasks.filter(t => t.status === TaskStatus.Completed);
     }
 
+    console.log(props.entityStatus)
+
     return <View>
         <View style={styles.todolist}>
             <Text style={{fontSize: 18, fontWeight: '600'}}>
                 <EditableSpan value={props.title} onChange={changeTodolistTitle}/>
             </Text>
             {props.entityStatus === "loading"
-                ? <TouchableOpacity style={{marginLeft: 15}}>
-                    <MaterialIcons name="delete-forever" size={24} color="black"/>
-                </TouchableOpacity>
+                ? <Text style={{marginLeft: 10}}><LoadingSmallIndicator/></Text>
                 : <TouchableOpacity onPress={removeTodolist} style={{marginLeft: 15}}>
                     <MaterialIcons name="delete-forever" size={24} color="black"/>
                 </TouchableOpacity>

@@ -1,9 +1,8 @@
 import {StyleSheet, View} from 'react-native';
-import React, {useEffect} from "react";
+import React from "react";
 import {Provider} from "react-redux";
-import {store, useAppDispatch} from "./src/reducers/store";
+import {store} from "./src/reducers/store";
 import Navigation from "./src/Navigation/Navigation";
-import {initializeAppTC} from "./src/reducers/app-reducer";
 
 
 export default function App() {
@@ -15,13 +14,6 @@ export default function App() {
         </View>
     );
 }
-
-// const HideKeyboard = ({children}: { children: ReactNode }): ReactElement => (
-//     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-//         {children}
-//     </TouchableWithoutFeedback>
-// )
-
 
 const styles = StyleSheet.create({
     container: {

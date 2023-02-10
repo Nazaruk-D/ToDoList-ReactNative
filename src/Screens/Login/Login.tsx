@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Alert, Button, ImageBackground, StyleSheet, Text, TextInput, View} from "react-native";
+import {Button, ImageBackground, StyleSheet, Text, TextInput, View} from "react-native";
 import {LoginProps} from "../../Type/NavigationType";
 import {useAppDispatch, useAppSelector} from "../../reducers/store";
 import {loginTC} from "../../features/Login/auth-reducer";
@@ -19,11 +19,6 @@ const Login = ({route, navigation}: LoginProps) => {
         email: false,
         password: false,
     })
-
-    useEffect(() => {
-        // if(email === '') serError({...error, email: 'error email'})
-    }, [email])
-
 
     const onPressHandler = () => {
         const params: LoginParamsType = {
@@ -68,7 +63,6 @@ const Login = ({route, navigation}: LoginProps) => {
                         </Text>
                         <TextInput style={styles.inputEmail} onChangeText={setEmail} value={email} placeholder={'email'}
                                    onBlur={() => validateEmail(email)}/>
-
                         <TextInput style={styles.inputPassword} onChangeText={setPassword} value={password}
                                    placeholder={'password'} secureTextEntry={eye}
                                    onBlur={() => validatePassword(password)}/>
@@ -81,7 +75,8 @@ const Login = ({route, navigation}: LoginProps) => {
                                       color={rememberMe ? '#3e2465' : undefined} style={{marginBottom: 20}}/>
                             <Text style={{marginLeft: 10}}>Remember me</Text>
                         </View>
-                        <Button color={'#3e2465'} title={'Login'} onPress={onPressHandler} disabled={error.email || error.password}/>
+                        <Button color={'#3e2465'} title={'Login'} onPress={onPressHandler}
+                                disabled={error.email || error.password}/>
                     </View>
                 </View>
             </View>

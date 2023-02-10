@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
-import {Button, ImageBackground, StyleSheet, TextInput, View} from "react-native";
-import {LoginProps, LogoutProps} from "../../Type/NavigationType";
+import React from 'react';
+import {Button, ImageBackground, StyleSheet, View} from "react-native";
+import {LogoutProps} from "../../Type/NavigationType";
 import {useAppDispatch, useAppSelector} from "../../reducers/store";
 import {logoutTC} from "../../features/Login/auth-reducer";
 
 const Logout = ({route, navigation}: LogoutProps) => {
     const dispatch = useAppDispatch()
-
     const backgroundImage = useAppSelector(store => store.app.backgroundImage)
 
     const onPressHandler = () => {
@@ -17,13 +16,12 @@ const Logout = ({route, navigation}: LogoutProps) => {
         <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
             <View style={styles.settingsContainer}>
                 <View style={styles.settingsBlock}>
-                        <View>
-                            <Button color={'#3e2465'} title={'Logout'} onPress={onPressHandler}/>
-                        </View>
+                    <View>
+                        <Button color={'#3e2465'} title={'Logout'} onPress={onPressHandler}/>
+                    </View>
                 </View>
             </View>
         </ImageBackground>
-
     );
 };
 

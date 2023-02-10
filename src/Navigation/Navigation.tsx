@@ -12,6 +12,7 @@ import Logout from "../Screens/Logout/Logout";
 import {initializeAppTC} from "../reducers/app-reducer";
 import {ActivityIndicator, StyleSheet, Text, View} from "react-native";
 import {useSelector} from "react-redux";
+import LoadingIndicator from "../components/LoadingIndicator/LoadingIndicator";
 
 
 const Stack = createMaterialBottomTabNavigator<RootStackParamList>();
@@ -22,7 +23,6 @@ const Navigation = () => {
     const dispatch = useAppDispatch()
     let startPage;
 
-
     useEffect(() => {
         dispatch(initializeAppTC())
     }, [isInitialized])
@@ -31,11 +31,8 @@ const Navigation = () => {
         startPage = isLogin ? 'Home' : 'Login'
     }, [isLogin])
 
-
     if (!isInitialized) {
-        return <View style={styles.progress}>
-            <ActivityIndicator size="large" color="#3e2465"/>
-        </View>
+        return <LoadingIndicator/>
     }
 
     return (
@@ -56,15 +53,15 @@ const Navigation = () => {
                                           ),
                                       }}
                         />
-                            <Stack.Screen name="Logout"
-                                            component={Logout}
-                                            options={{
-                                                tabBarLabel: 'Logout',
-                                                tabBarIcon: ({color}) => (
-                                                    <MaterialCommunityIcons name="logout" size={24} color={color}/>
-                                                ),
-                                            }}
-                            />
+                        <Stack.Screen name="Logout"
+                                      component={Logout}
+                                      options={{
+                                          tabBarLabel: 'Logout',
+                                          tabBarIcon: ({color}) => (
+                                              <MaterialCommunityIcons name="logout" size={24} color={color}/>
+                                          ),
+                                      }}
+                        />
                         <Stack.Screen name="Profile"
                                       component={Profile}
                                       options={{
@@ -87,23 +84,13 @@ const Navigation = () => {
                                           ),
                                       }}
                         />
-
                     </Stack.Navigator>
                 }
-
             </NavigationContainer>
         </SafeAreaProvider>
     );
 };
 
-const styles = StyleSheet.create({
-    progress: {
-        position: 'absolute',
-        top: '50%',
-        textAlign: 'center',
-        width: '100%',
-        fontSize: 30
-    }
-});
+
 
 export default Navigation;
